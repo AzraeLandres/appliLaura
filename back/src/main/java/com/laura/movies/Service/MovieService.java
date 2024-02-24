@@ -62,4 +62,8 @@ public class MovieService {
         return movieRepo.findByDurationBetween(start, end);
     }
 
+    public MovieEntity save(MovieEntity movieEntity) {
+        return movieRepo.save(movieEntity);
+    }
+
 }
