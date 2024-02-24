@@ -2,6 +2,8 @@ package com.laura.movies.Entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,6 +27,7 @@ public class WhoEntity {
 
     private String name;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "who")
     private List<MovieEntity> movies;
 }

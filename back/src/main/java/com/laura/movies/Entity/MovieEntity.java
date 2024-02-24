@@ -2,6 +2,8 @@ package com.laura.movies.Entity;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,10 +36,12 @@ public class MovieEntity {
     private String review;
     private Boolean seen;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "id_genre")
     private GenreEntity genre;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "id_who")
     private WhoEntity who;
