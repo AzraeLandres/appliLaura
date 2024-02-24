@@ -1,7 +1,6 @@
 package com.laura.movies.Entity;
 
 import java.sql.Date;
-import java.sql.Time;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +28,7 @@ public class MovieEntity {
     private String vo;
     private String vf;
     private Integer year;
-    private Time length;
+    private Integer duration;
     private Float rating;
     private String tag;
     private String review;
