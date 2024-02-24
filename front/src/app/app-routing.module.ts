@@ -5,15 +5,17 @@ import { MyMoviesComponent } from './my-movies/my-movies.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { SearchComponent } from './search/search.component';
 import { ToSeeComponent } from './to-see/to-see.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
+   { path: 'home', component: HomeComponent }
   { path: 'to-see', component: ToSeeComponent },
   { path: 'my-movies', component: MyMoviesComponent },
   { path: 'add-movie', component: AddMovieComponent },
   { path: 'quiz', component: QuizComponent },
   { path: 'search', component: SearchComponent },
-  { path: '', redirectTo: '/to-see', pathMatch: 'full' },
-  { path: '**', redirectTo: '/to-see' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', redirectTo: '/home' },
 ];
 
 @NgModule({

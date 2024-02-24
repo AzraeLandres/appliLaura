@@ -9,6 +9,7 @@ import { MyMoviesComponent } from './my-movies/my-movies.component';
 import { AddMovieComponent } from './add-movie/add-movie.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { SearchComponent } from './search/search.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { SearchComponent } from './search/search.component';
     AddMovieComponent,
     QuizComponent,
     SearchComponent,
+    HomeComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
