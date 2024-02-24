@@ -1,4 +1,11 @@
 :root {
   --lightGreen: #a2cc9c;
   --darkGreen: #4a7d52;
+  --purple: #b3aee4;
+  --blue: #7c99ed;
+}
+
+@font-face {
+  font-family: "Frogie";
+  src: url("../src/assets/font/Frogie-Regular.ttf") format("truetype");
 }
