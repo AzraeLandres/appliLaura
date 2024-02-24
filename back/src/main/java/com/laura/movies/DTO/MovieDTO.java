@@ -5,7 +5,7 @@ import java.sql.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.sql.Time;
+
 import java.util.Set;
 
 @NoArgsConstructor
@@ -17,7 +17,7 @@ public class MovieDTO {
     private String vo;
     private String vf;
     private Integer year;
-    private Time length;
+    private Integer duration;
     private Float rating;
     private String tag;
     private String review;
