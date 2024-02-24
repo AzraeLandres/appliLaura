@@ -21,3 +21,15 @@
 .flex {
   display: flex;
 }
+
+html {
+  height: 100vh;
+}
+
+body {
+  height: 100%;
+}
+
+main {
+  min-height: calc(100vh - 14rem);
+}
