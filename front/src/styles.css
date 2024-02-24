@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Zen+Loop:ital@0;1&display=swap");
+
 :root {
   --lightGreen: #a2cc9c;
   --darkGreen: #4a7d52;
@@ -8,4 +10,14 @@
 @font-face {
   font-family: "Frogie";
   src: url("../src/assets/font/Frogie-Regular.ttf") format("truetype");
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.flex {
+  display: flex;
 }
