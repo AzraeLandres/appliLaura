@@ -1,0 +1,52 @@
+.wrapper {
+  height: 9rem;
+}
+
+.quiz {
+  position: absolute;
+  top: 6rem;
+  left: 1.2rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--lightGreen);
+  width: 90%;
+  height: 8rem;
+  margin: auto;
+  border-radius: 25px;
+  z-index: 2;
+  color: white;
+  gap: 1rem;
+}
+
+.quiz h1 {
+  font-family: "Frogie", cursive;
+  font-size: 1.2rem;
+  font-weight: 100;
+}
+
+.quiz button {
+  font-family: "Nunito sans", sans-serif;
+  background-color: var(--darkGreen);
+  color: white;
+  border: none;
+  padding: 0.5rem 4rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lastSeen,
+.toSee {
+  width: 90%;
+  margin: 1rem auto;
+}
+
+h2 {
+  font-family: "Frogie", cursive;
+  color: var(--darkGreen);
+  font-size: 1.5rem;
+  font-weight: 100;
+  margin: 1rem 0;
+}
