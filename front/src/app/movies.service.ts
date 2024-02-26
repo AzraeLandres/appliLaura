@@ -16,4 +16,8 @@ export class MoviesService {
   getMoviesbyGenreId(id: number): Observable<any> {
     return this.http.get(this.url + '/genre/' + id);
   }
+
+  getMoviesByDateDesc(): Observable<any> {
+    return this.http.get(this.url + '/date/desc');
+  }
 }
