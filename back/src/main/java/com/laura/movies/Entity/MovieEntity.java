@@ -35,7 +35,7 @@ public class MovieEntity {
     private String tag;
     private String review;
     private Boolean seen;
-
+    private String posterUrl;
     @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "id_genre")

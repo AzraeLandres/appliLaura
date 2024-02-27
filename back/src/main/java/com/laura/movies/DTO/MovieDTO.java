@@ -22,6 +22,7 @@ public class MovieDTO {
     private String tag;
     private String review;
     private Boolean seen;
+    private String posterUrl;
 
     private Set<GenreDTO> genre;
     private Set<WhoDTO> who;

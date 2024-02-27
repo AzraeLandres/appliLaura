@@ -8,6 +8,7 @@ import com.laura.movies.Service.MovieService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -68,6 +69,11 @@ public class MovieController {
     @GetMapping("/date/desc")
     public List<MovieEntity> getMoviesByDateDesc() {
         return movieService.findAllByOrderByDateDesc();
+    }
+
+    @GetMapping("/date/top3")
+    public List<MovieEntity> getTop3MoviesByDateDesc() {
+        return movieService.find3ByOrderByDateDesc();
     }
 
     @GetMapping("/duration/greater/{duration}")

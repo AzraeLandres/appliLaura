@@ -8,7 +8,9 @@
 <section class="lastSeen">
   <h2>Dernièrement vu</h2>
   <div class="flex">
-    <div class="movieCard"></div>
+    <div class="movieCard" *ngFor="let movie of movies">
+      <img [src]="movie.posterUrl" alt="" />
+    </div>
   </div>
 </section>
 

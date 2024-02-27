@@ -1,7 +1,11 @@
 package com.laura.movies.Repository;
 
 import java.util.List;
+
+import org.springframework.data.domain.Pageable;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.laura.movies.Entity.MovieEntity;
@@ -25,7 +29,13 @@ public interface MovieRepo extends JpaRepository<MovieEntity, Integer> {
 
     List<MovieEntity> findAllByOrderByDateAsc();
 
+    @Query("SELECT m FROM MovieEntity m WHERE m.date IS NOT NULL ORDER BY m.date DESC")
     List<MovieEntity> findAllByOrderByDateDesc();
+
+    @Query("SELECT m FROM MovieEntity m WHERE m.date IS NOT NULL ORDER BY m.date DESC")
+    List<MovieEntity> find3ByOrderByDateDesc(Pageable pageable);
+
+    List<MovieEntity> findByDuration(Integer duration);
 
     List<MovieEntity> findByDurationGreaterThan(Integer duration);
 

@@ -3,6 +3,9 @@ package com.laura.movies.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.laura.movies.Entity.MovieEntity;
@@ -44,6 +47,11 @@ public class MovieService {
 
     public List<MovieEntity> findAllByOrderByDateAsc() {
         return movieRepo.findAllByOrderByDateAsc();
+    }
+
+    public List<MovieEntity> find3ByOrderByDateDesc() {
+        Pageable topThree = PageRequest.of(0, 3);
+        return movieRepo.find3ByOrderByDateDesc(topThree);
     }
 
     public List<MovieEntity> findAllByOrderByDateDesc() {

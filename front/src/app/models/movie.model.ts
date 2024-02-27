@@ -9,6 +9,7 @@ export class Movie {
   tag: string;
   review: string;
   seen: boolean;
+  posterUrl: string;
   id_genre: number;
   id_who: number;
 
@@ -23,6 +24,7 @@ export class Movie {
     tag: string,
     review: string,
     seen: boolean,
+    posterUrl: string,
     id_genre: number,
     id_who: number
   ) {
@@ -36,6 +38,7 @@ export class Movie {
     this.tag = tag;
     this.review = review;
     this.seen = seen;
+    this.posterUrl = posterUrl;
     this.id_genre = id_genre;
     this.id_who = id_who;
   }
