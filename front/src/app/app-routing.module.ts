@@ -6,6 +6,7 @@ import { QuizComponent } from './quiz/quiz.component';
 import { SearchComponent } from './search/search.component';
 import { ToSeeComponent } from './to-see/to-see.component';
 import { HomeComponent } from './home/home.component';
+import { MoviePageComponent } from './movie-page/movie-page.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'add-movie', component: AddMovieComponent },
   { path: 'quiz', component: QuizComponent },
   { path: 'search', component: SearchComponent },
+  { path: 'movie/:id', component: MoviePageComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' },
 ];

@@ -57,4 +57,6 @@ export class HomeComponent implements OnInit {
       }
     );
   }
+
+  // Méthode pour naviguer vers la page de détail d'un film
 }

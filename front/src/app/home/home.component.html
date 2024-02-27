@@ -9,7 +9,11 @@
   <h2>Dernièrement vu</h2>
   <div class="cards flex">
     <div class="movieCard" *ngFor="let movie of movies">
-      <img [src]="movie.posterUrl" alt="poster of movie" />
+      <img
+        [src]="movie.posterUrl"
+        alt="poster of movie"
+        [routerLink]="['/movie', movie.id]"
+      />
     </div>
   </div>
 </section>
@@ -18,7 +22,11 @@
   <h2>À voir</h2>
   <div class="cards flex">
     <div class="movieCard" *ngFor="let unseen of unseenMovies">
-      <img [src]="unseen.posterUrl" alt="poster of movie" />
+      <img
+        [src]="unseen.posterUrl"
+        alt="poster of movie"
+        [routerLink]="['/movie', unseen.id]"
+      />
     </div>
   </div>
 </section>

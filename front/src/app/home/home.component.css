@@ -59,6 +59,7 @@ h2 {
   width: 90%;
   height: 10rem;
   margin-bottom: 1rem;
+  cursor: pointer;
 }
 
 .movieCard img {

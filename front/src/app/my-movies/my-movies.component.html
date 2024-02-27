@@ -1,1 +1,20 @@
-<p>my-movies works!</p>
+<div class="wrapper">
+  <div class="header flex">
+    <h1>Mes films</h1>
+    <button (click)="showFilters = !showFilters" type="button">
+      Tri/Filtres
+    </button>
+  </div>
+
+  <div class="movies">
+    <div class="cards flex">
+      <div
+        class="movieCard"
+        *ngFor="let movie of movies"
+        [routerLink]="['/movie', movie.id]"
+      >
+        <img [src]="movie.posterUrl" [alt]="movie.vo" />
+      </div>
+    </div>
+  </div>
+</div>
