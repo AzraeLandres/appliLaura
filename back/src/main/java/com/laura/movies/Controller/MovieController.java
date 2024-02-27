@@ -46,6 +46,16 @@ public class MovieController {
         return movieService.findBySeen(seen);
     }
 
+    @GetMapping("/unseen")
+    public List<MovieEntity> getUnseenMovies() {
+        return movieService.findUnseen();
+    }
+
+    @GetMapping("/unseen/last3")
+    public List<MovieEntity> getUnseenLast3Movies() {
+        return movieService.findUnseenLast3();
+    }
+
     @GetMapping("/tag/{tag}")
     public List<MovieEntity> getMoviesByTag(@PathVariable String tag) {
         return movieService.findByTag(tag);

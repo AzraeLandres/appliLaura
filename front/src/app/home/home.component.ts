@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   posterUrl!: string;
   ngOnInit(): void {
     this.getMoviesByDateDesc();
+    this.getLast3UnseenMovies();
   }
 
   // Méthode pour récupérer les 3 derniers films vus
@@ -29,6 +30,27 @@ export class HomeComponent implements OnInit {
           );
         });
         console.log(this.movies);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  //Méthode pour récupérer les 3 derniers films non vus
+
+  unseenMovies: Movie[] = [];
+  getLast3UnseenMovies() {
+    this.moviesService.getLast3UnseenMovies().subscribe(
+      (data) => {
+        this.unseenMovies = data;
+        this.unseenMovies.forEach((movie) => {
+          this.moviesService.getMoviePoster(movie.vo).subscribe(
+            (posterUrl) => (movie.posterUrl = posterUrl),
+            (error) => console.log(error)
+          );
+        });
+        console.log(this.unseenMovies);
       },
       (error) => {
         console.log(error);

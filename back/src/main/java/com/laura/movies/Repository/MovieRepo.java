@@ -19,6 +19,12 @@ public interface MovieRepo extends JpaRepository<MovieEntity, Integer> {
 
     List<MovieEntity> findBySeen(Boolean seen);
 
+    @Query("SELECT m FROM MovieEntity m WHERE m.seen = false")
+    List<MovieEntity> findUnseen();
+
+    @Query("SELECT m FROM MovieEntity m WHERE m.seen = false")
+    List<MovieEntity> findUnseenLast3(Pageable pageable);
+
     List<MovieEntity> findAll();
 
     List<MovieEntity> findByTag(String tag);

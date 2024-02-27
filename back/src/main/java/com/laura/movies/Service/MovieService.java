@@ -33,6 +33,15 @@ public class MovieService {
         return movieRepo.findBySeen(seen);
     }
 
+    public List<MovieEntity> findUnseen() {
+        return movieRepo.findUnseen();
+    }
+
+    public List<MovieEntity> findUnseenLast3() {
+        Pageable lastThree = PageRequest.of(0, 3);
+        return movieRepo.findUnseenLast3(lastThree);
+    }
+
     public List<MovieEntity> findByTag(String tag) {
         return movieRepo.findByTag(tag);
     }

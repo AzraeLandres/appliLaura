@@ -7,16 +7,18 @@
 
 <section class="lastSeen">
   <h2>Dernièrement vu</h2>
-  <div class="flex">
+  <div class="cards flex">
     <div class="movieCard" *ngFor="let movie of movies">
-      <img [src]="movie.posterUrl" alt="" />
+      <img [src]="movie.posterUrl" alt="poster of movie" />
     </div>
   </div>
 </section>
 
 <section class="toSee">
   <h2>À voir</h2>
-  <div class="flex">
-    <div class="movieCard"></div>
+  <div class="cards flex">
+    <div class="movieCard" *ngFor="let unseen of unseenMovies">
+      <img [src]="unseen.posterUrl" alt="poster of movie" />
+    </div>
   </div>
 </section>

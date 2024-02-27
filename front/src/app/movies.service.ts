@@ -38,4 +38,12 @@ export class MoviesService {
   getMoviesByDateDescTop3(): Observable<any> {
     return this.http.get(this.url + '/date/top3');
   }
+
+  getUnseenMovies(): Observable<any> {
+    return this.http.get(this.url + '/unseen');
+  }
+
+  getLast3UnseenMovies(): Observable<any> {
+    return this.http.get(this.url + '/unseen/last3');
+  }
 }

@@ -10,6 +10,7 @@ import { AddMovieComponent } from './add-movie/add-movie.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { SearchComponent } from './search/search.component';
 import { HomeComponent } from './home/home.component';
+import { MoviePageComponent } from './movie-page/movie-page.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { HomeComponent } from './home/home.component';
     QuizComponent,
     SearchComponent,
     HomeComponent,
+    MoviePageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
