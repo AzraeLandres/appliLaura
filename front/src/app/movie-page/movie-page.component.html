@@ -1,9 +1,42 @@
-<section class="header">
-  <aside class="movie" *ngIf="movie$ | async as movie">
-    <div class="cards flex">
-      <div class="movieCard">
-        <img [src]="movie.posterUrl" [alt]="" />
-      </div>
+<div class="wrapper" *ngIf="movie$ | async as movie">
+  <section class="header">
+    <p class="unseen" *ngIf="movie.seen === false">Pas encore vu !</p>
+    <div class="up flex">
+      <aside class="movie">
+        <div class="movieCard">
+          <img [src]="movie.posterUrl" [alt]="" />
+        </div>
+      </aside>
+      <aside class="info">
+        <!-- Later when you click on it you can see the movies by genre-->
+
+        <h1>{{ movie.vo }} ({{ movie.year }})</h1>
+        <h2 class="vf">{{ movie.vf }}</h2>
+        <p class="unseen" *ngIf="movie.vf === ''">Oups pas de vf</p>
+        <p class="recommend">Recommandé par : {{ movie.who.name }}</p>
+
+        <p class="seen date" *ngIf="movie.seen === true">
+          Vu le : {{ movie.date | date : "dd/MM/yyyy" }}
+        </p>
+        <button type="button">{{ movie.genre.name }}</button>
+      </aside>
     </div>
-  </aside>
-</section>
+  </section>
+
+  <section class="body">
+    <p class="unseen" *ngIf="movie.seen === false || movie.rating === null">
+      Pas de note !
+    </p>
+    <!-- À remplacer par des étoiles-->
+    <p class="seen" *ngIf="movie.seen === true && movie.rating !== null">
+      Note : {{ movie.rating }}/5
+    </p>
+
+    <h2 class="review">Avis</h2>
+    <p class="unseen" *ngIf="movie.seen === false || movie.review === ''">
+      Pas d'avis !
+    </p>
+
+    <div class="seen" *ngIf="movie.seen === true">{{ movie.review }}</div>
+  </section>
+</div>

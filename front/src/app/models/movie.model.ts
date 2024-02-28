@@ -10,8 +10,8 @@ export class Movie {
   review: string;
   seen: boolean;
   posterUrl: string;
-  id_genre: number;
-  id_who: number;
+  genre: { id: number; name: string };
+  who: { id: number; name: string };
 
   constructor(
     id: number,
@@ -25,8 +25,8 @@ export class Movie {
     review: string,
     seen: boolean,
     posterUrl: string,
-    id_genre: number,
-    id_who: number
+    genre: { id: number; name: string },
+    who: { id: number; name: string }
   ) {
     this.id = id;
     this.date = date;
@@ -39,7 +39,7 @@ export class Movie {
     this.review = review;
     this.seen = seen;
     this.posterUrl = posterUrl;
-    this.id_genre = id_genre;
-    this.id_who = id_who;
+    this.genre = genre;
+    this.who = who;
   }
 }

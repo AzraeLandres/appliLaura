@@ -10,7 +10,6 @@ import { EMPTY, Observable, map, switchMap, tap } from 'rxjs';
   styleUrl: './movie-page.component.css',
 })
 export class MoviePageComponent implements OnInit {
-  movie: Movie = {} as Movie;
   movie$: Observable<Movie> = EMPTY;
 
   constructor(
@@ -33,6 +32,7 @@ export class MoviePageComponent implements OnInit {
   getMovieById(id: number): Observable<Movie> {
     return this.moviesService.getMovieById(id).pipe(
       switchMap((movie) => {
+        console.log(movie);
         return this.moviesService.getMoviePoster(movie.vo).pipe(
           tap((posterUrl) => (movie.posterUrl = posterUrl)),
           map(() => movie)
