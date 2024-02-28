@@ -11,6 +11,7 @@ import { QuizComponent } from './quiz/quiz.component';
 import { SearchComponent } from './search/search.component';
 import { HomeComponent } from './home/home.component';
 import { MoviePageComponent } from './movie-page/movie-page.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { MoviePageComponent } from './movie-page/movie-page.component';
     MoviePageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
-  providers: [],
+  providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

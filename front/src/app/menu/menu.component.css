@@ -1,5 +1,7 @@
 .wrapper {
-  position: relative;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
   background-color: var(--lightGreen);
   height: 6rem;
   justify-content: center;

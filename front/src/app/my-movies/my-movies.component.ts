@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Movie } from '../models/movie.model';
 import { MoviesService } from '../movies.service';
 import { HttpClient } from '@angular/common/http';
-import { forkJoin } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-my-movies',

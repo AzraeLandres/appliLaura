@@ -1,3 +1,7 @@
+.wrapper {
+  position: fixed;
+  top: 6.5rem;
+}
 .header {
   background-color: white;
   height: 3.5rem;
@@ -31,7 +35,7 @@ button {
 .movies {
   width: 90%;
   margin: 1rem auto;
-  z-index: 3;
+
   overflow: scroll;
   height: calc(100vh - 3.5rem);
   max-height: calc(100vh - 3.5rem);

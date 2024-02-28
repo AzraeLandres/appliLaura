@@ -33,3 +33,12 @@ main {
   height: calc(100% - 13rem);
   min-height: calc(100% - 13rem);
 }
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
