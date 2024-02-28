@@ -1,1 +1,9 @@
-<p>movie-page works!</p>
+<section class="header">
+  <aside class="movie" *ngIf="movie$ | async as movie">
+    <div class="cards flex">
+      <div class="movieCard">
+        <img [src]="movie.posterUrl" [alt]="" />
+      </div>
+    </div>
+  </aside>
+</section>

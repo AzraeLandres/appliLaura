@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Movie } from '../models/movie.model';
 import { MoviesService } from '../movies.service';
 import { HttpClient } from '@angular/common/http';
+import { of, tap } from 'rxjs';
 
 @Component({
   selector: 'app-my-movies',
@@ -18,26 +19,14 @@ export class MyMoviesComponent implements OnInit {
   }
   // Methode pour montrer tous les films
   getallMovies() {
-    const storedMovies = localStorage.getItem('movies');
-
-    if (storedMovies?.length === 0) {
-      this.movies = JSON.parse(storedMovies);
-    } else {
-      this.movieService.getMovies().subscribe(
-        (data) => {
-          this.movies = data;
-          this.movies.forEach((movie) => {
-            this.movieService.getMoviePoster(movie.vo).subscribe(
-              (posterUrl) => (movie.posterUrl = posterUrl),
-              (error) => console.log(error)
-            );
-          });
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    }
+    this.movieService.getMovies().subscribe(
+      (data) => {
+        this.movies = data;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   // Methode pour montrer les films par genre

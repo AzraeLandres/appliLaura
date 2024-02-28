@@ -1,6 +1,7 @@
 package com.laura.movies.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Pageable;
 
@@ -12,6 +13,8 @@ import com.laura.movies.Entity.MovieEntity;
 
 @Repository
 public interface MovieRepo extends JpaRepository<MovieEntity, Integer> {
+
+    Optional<MovieEntity> findById(Integer id);
 
     List<MovieEntity> findByGenreId(Integer id);
 

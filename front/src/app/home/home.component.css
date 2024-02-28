@@ -4,7 +4,7 @@
 
 .quiz {
   position: absolute;
-  top: 6rem;
+  top: 0;
   left: 1.2rem;
   flex-direction: column;
   justify-content: center;
@@ -13,6 +13,7 @@
   width: 90%;
   height: 8rem;
   margin: auto;
+
   border-radius: 25px;
   z-index: 2;
   color: white;
@@ -42,6 +43,11 @@
   width: 90%;
   margin: 1rem auto;
   z-index: 3;
+}
+
+.toSee,
+.lastSeen {
+  margin-top: 1.5rem;
 }
 
 h2 {

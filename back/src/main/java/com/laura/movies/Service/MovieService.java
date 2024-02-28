@@ -1,6 +1,7 @@
 package com.laura.movies.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,6 +20,10 @@ public class MovieService {
 
     public List<MovieEntity> findAll() {
         return movieRepo.findAll();
+    }
+
+    public Optional<MovieEntity> findByMovieId(Integer id) {
+        return movieRepo.findById(id);
     }
 
     public List<MovieEntity> findByGenreId(Integer id) {
