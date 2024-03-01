@@ -30,6 +30,7 @@ public class MovieController {
     @GetMapping("/all")
     public List<MovieEntity> getAllMovies() {
         return movieService.findAll();
+
     }
 
     @GetMapping("/{id}")

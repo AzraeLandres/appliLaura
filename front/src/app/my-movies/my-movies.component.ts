@@ -22,6 +22,12 @@ export class MyMoviesComponent implements OnInit {
     this.movieService.getMovies().subscribe(
       (data) => {
         this.movies = data;
+        this.movies.forEach((movie) => {
+          this.movieService.getMoviePoster(movie.vo).subscribe(
+            (posterUrl) => (movie.posterUrl = posterUrl),
+            (error) => console.log(error)
+          );
+        });
       },
       (error) => {
         console.log(error);

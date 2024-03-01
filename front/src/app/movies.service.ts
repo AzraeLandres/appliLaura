@@ -33,29 +33,8 @@ export class MoviesService {
   }
 
   //Méthode pour chercher tous les films
-  getMovies(): Observable<Movie[]> {
-    if (this.movies.length > 0) {
-      return of(this.movies);
-    }
-
-    return this.http.get<Movie[]>(this.url + '/all').pipe(
-      switchMap((movies) => {
-        const fetchPosterTasks = movies.map((movie) => {
-          if (!movie.posterUrl) {
-            return this.getMoviePoster(movie.vo).pipe(
-              tap((posterUrl: string) => (movie.posterUrl = posterUrl))
-            );
-          }
-
-          return of(null);
-        });
-
-        return forkJoin(fetchPosterTasks).pipe(
-          map(() => movies),
-          tap(() => (this.movies = movies))
-        );
-      })
-    );
+  getMovies() {
+    return this.http.get<Movie[]>(this.url + '/all');
   }
 
   //Méthode pour chercher film par id
