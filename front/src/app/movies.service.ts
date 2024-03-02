@@ -7,7 +7,7 @@ import { Movie } from './models/movie.model';
   providedIn: 'root',
 })
 export class MoviesService {
-  private url = 'http://localhost:8080/movies';
+  private url = 'https://dino-cine-back-15b7eabfff73.herokuapp.com/movies';
 
   private tmdbApiKey = 'bfe71b7c7b147b1316508086f210ad2a';
 

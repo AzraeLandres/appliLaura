@@ -1,0 +1,9 @@
+server {
+  listen <%= ENV["PORT"] %>;
+  server_name _;
+  root /app/dist/front;
+
+  location / {
+    try_files $uri $uri/ /index.html;
+  }
+}
