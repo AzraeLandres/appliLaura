@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Movie } from '../models/movie.model';
 import { MoviesService } from '../movies.service';
 import { HttpClient } from '@angular/common/http';
@@ -15,6 +15,7 @@ export class MyMoviesComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute
   ) {}
+
   movies: Movie[] = [];
   showFilters = false;
 
@@ -22,6 +23,10 @@ export class MyMoviesComponent implements OnInit {
     this.route.queryParamMap.subscribe((params) => {
       this.getParsedUrl(params);
     });
+  }
+
+  ngOnDestroy() {
+    this.route.queryParamMap.subscribe().unsubscribe();
   }
 
   toggleFilters() {
@@ -72,9 +77,6 @@ export class MyMoviesComponent implements OnInit {
         this.getFavMovies();
       }
     }
-
-    // toggle le menu de filtres
-    this.toggleFilters();
   }
 
   // Methode pour montrer les films par genre

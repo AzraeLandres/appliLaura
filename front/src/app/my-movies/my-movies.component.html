@@ -1,7 +1,13 @@
 <div class="wrapper">
   <div class="header flex">
     <h1>Mes films</h1>
-    <button (click)="toggleFilters()" type="button">Tri/Filtres</button>
+    <button
+      id="filterButton"
+      (click)="toggleFilters(); $event.stopPropagation()"
+      type="button"
+    >
+      Tri/Filtres
+    </button>
   </div>
 
   <div class="movies">
@@ -16,4 +22,8 @@
     </div>
   </div>
 </div>
-<app-filter-sort-menu *ngIf="showFilters === true"> </app-filter-sort-menu>
+<app-filter-sort-menu
+  *ngIf="showFilters === true"
+  (clickOutside)="showFilters = false"
+>
+</app-filter-sort-menu>

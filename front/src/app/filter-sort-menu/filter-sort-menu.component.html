@@ -5,21 +5,50 @@
     <h3>Trier par</h3>
 
     <div class="buttons flex">
-      <button type="button" (click)="setPrefSort('sort', 'order')">
+      <button
+        type="button"
+        (click)="setPrefSort('sort', 'order')"
+        [class.selected]="userChoices['sort'][0] === 'order'"
+        class="button"
+      >
         Ordre alphabétique
       </button>
-      <button type="button" (click)="setPrefSort('sort', 'date')">Date</button>
-      <button type="button" (click)="setPrefSort('sort', 'note')">Note</button>
+      <button
+        type="button"
+        (click)="setPrefSort('sort', 'date')"
+        [class.selected]="userChoices['sort'][0] === 'date'"
+        class="button"
+      >
+        Date
+      </button>
+      <button
+        type="button"
+        (click)="setPrefSort('sort', 'note')"
+        [class.selected]="userChoices['sort'][0] === 'note'"
+        class="button"
+      >
+        Note
+      </button>
     </div>
   </div>
 
   <div class="form-group">
     <h3>Filtrer par</h3>
     <div class="buttons flex">
-      <button type="button" (click)="setPrefFilter('filter', 'beurk')">
+      <button
+        type="button"
+        (click)="setPrefFilter('filter', 'beurk')"
+        class="button"
+        [class.selected]="userChoices['filter'][0] === 'beurk'"
+      >
         Beurk
       </button>
-      <button type="button" (click)="setPrefFilter('filter', 'favoris')">
+      <button
+        type="button"
+        (click)="setPrefFilter('filter', 'favoris')"
+        class="button"
+        [class.selected]="userChoices['filter'][0] === 'favoris'"
+      >
         Favoris
       </button>
     </div>

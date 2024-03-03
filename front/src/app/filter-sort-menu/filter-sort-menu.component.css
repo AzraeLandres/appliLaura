@@ -34,7 +34,7 @@ h2 {
   gap: 0.8rem;
 }
 
-.buttons button {
+.buttons .button {
   background-color: white;
   color: #363636;
   border: none;
@@ -54,4 +54,10 @@ button[type="submit"] {
   font-size: 0.7rem;
   border: none;
   margin: 1rem auto;
+}
+
+.buttons .selected {
+  border: 2px solid var(--darkGreen);
+
+  font-weight: 600;
 }
