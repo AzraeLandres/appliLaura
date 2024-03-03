@@ -30,6 +30,8 @@ public interface MovieRepo extends JpaRepository<MovieEntity, Integer> {
 
     List<MovieEntity> findAll();
 
+    List<MovieEntity> findByOrderByVoAsc();
+
     List<MovieEntity> findByTag(String tag);
 
     List<MovieEntity> findAllByOrderByRatingAsc();

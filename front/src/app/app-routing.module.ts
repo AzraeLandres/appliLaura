@@ -7,11 +7,13 @@ import { SearchComponent } from './search/search.component';
 import { ToSeeComponent } from './to-see/to-see.component';
 import { HomeComponent } from './home/home.component';
 import { MoviePageComponent } from './movie-page/movie-page.component';
+import { FilterSortMenuComponent } from './filter-sort-menu/filter-sort-menu.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'to-see', component: ToSeeComponent },
   { path: 'my-movies', component: MyMoviesComponent },
+  { path: 'my-movies/filtered', component: MyMoviesComponent },
   { path: 'add-movie', component: AddMovieComponent },
   { path: 'quiz', component: QuizComponent },
   { path: 'search', component: SearchComponent },

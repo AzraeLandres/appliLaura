@@ -1,0 +1,15 @@
+{
+  "name": "DinoCiné",
+  "short_name": "DinoCiné",
+  "theme_color": "#a2cc9c",
+  "background_color": "#a2cc9c",
+  "display": "standalone",
+  "scope": "./",
+  "start_url": "./",
+  "icons": [
+    {
+      "src": "assets/logo.svg",
+      "sizes": "72x72"
+    }
+  ]
+}

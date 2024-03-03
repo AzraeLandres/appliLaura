@@ -89,4 +89,7 @@ public class MovieService {
         return movieRepo.save(movieEntity);
     }
 
+    public List<MovieEntity> findAllByOrderByVoAsc() {
+        return movieRepo.findByOrderByVoAsc();
+    }
 }

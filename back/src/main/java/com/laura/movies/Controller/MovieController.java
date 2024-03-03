@@ -33,6 +33,11 @@ public class MovieController {
 
     }
 
+    @GetMapping("/all/asc")
+    public List<MovieEntity> getAllMoviesByVoAsc() {
+        return movieService.findAllByOrderByVoAsc();
+    }
+
     @GetMapping("/{id}")
     public Optional<MovieEntity> getMovieById(@PathVariable Integer id) {
         return movieService.findByMovieId(id);
