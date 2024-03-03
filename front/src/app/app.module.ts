@@ -15,6 +15,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { FilterSortMenuComponent } from './filter-sort-menu/filter-sort-menu.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FilterMenuComponent } from './filter-menu/filter-menu.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     MoviePageComponent,
     FilterSortMenuComponent,
+    FilterMenuComponent,
   ],
   imports: [
     BrowserModule,

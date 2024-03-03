@@ -1,0 +1,60 @@
+.wrapper {
+  position: fixed;
+  top: 4.5rem;
+}
+.header {
+  background-color: white;
+  height: 3.5rem;
+  width: 90%;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem auto;
+  gap: 2rem;
+}
+
+h1 {
+  font-family: "Frogie", cursive;
+  font-size: 2rem;
+  font-weight: 100;
+  color: var(--purple);
+  margin: 1rem 0;
+  text-align: center;
+}
+
+button {
+  font-family: "Nunito sans", sans-serif;
+  background-color: var(--purple);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.movies {
+  width: 90%;
+  margin: 1rem auto;
+
+  overflow: scroll;
+  height: calc(100vh - 3.5rem);
+  max-height: calc(100vh - 3.5rem);
+}
+
+.cards {
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+.movieCard {
+  width: 6.2rem;
+  height: 10rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.movieCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}

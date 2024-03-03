@@ -12,7 +12,6 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 export class MyMoviesComponent implements OnInit {
   constructor(
     private movieService: MoviesService,
-    private http: HttpClient,
     private route: ActivatedRoute
   ) {}
 

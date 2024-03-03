@@ -1,1 +1,29 @@
-<p>to-see works!</p>
+<div class="wrapper">
+  <div class="header flex">
+    <h1>À voir</h1>
+    <button
+      id="filterButton"
+      (click)="toggleFilters(); $event.stopPropagation()"
+      type="button"
+    >
+      Filtres
+    </button>
+  </div>
+
+  <div class="movies">
+    <div class="cards flex">
+      <div
+        class="movieCard"
+        *ngFor="let movie of movies"
+        [routerLink]="['/movie', movie.id]"
+      >
+        <img [src]="movie.posterUrl" [alt]="movie.vo" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-filter-menu
+  *ngIf="showFilters === true"
+  (clickOutside)="showFilters = false"
+></app-filter-menu>
