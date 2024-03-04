@@ -15,6 +15,8 @@ export class ToSeeComponent {
   ) {}
 
   movies: Movie[] = [];
+  moviesGenres: any = { genre: [], id: 0 };
+  moviesDuration: any = { duration: '' };
   showFilters = false;
 
   ngOnInit(): void {
@@ -32,11 +34,12 @@ export class ToSeeComponent {
     console.log(this.showFilters);
   }
 
-  // Methode pour montrer tous les films
-  getallMovies() {
-    this.movieService.getMovies().subscribe(
+  // Methode pour montrer tous les films pas vus
+  getUnseenMovies() {
+    this.movieService.getUnseenMovies().subscribe(
       (data) => {
         this.movies = data;
+        console.log(this.movies);
         this.movies.forEach((movie) => {
           this.movieService.getMoviePoster(movie.vo).subscribe(
             (posterUrl) => (movie.posterUrl = posterUrl),
@@ -55,39 +58,53 @@ export class ToSeeComponent {
   // Récupération des paramètres de l'URL
   getParsedUrl(params: ParamMap) {
     console.log(params);
-    if (!params.has('sort') && !params.has('filter')) {
-      this.getallMovies();
-    } else if (params.has('sort')) {
-      if (params.get('sort') === 'order') {
-        this.getMoviesByTitle();
-      } else if (params.get('sort') === 'note') {
-        this.getMoviesByNote();
-      } else if (params.get('sort') === 'date') {
-        this.getMoviesByDate();
-      }
-    }
+    if (!params.has('filter')) {
+      this.getUnseenMovies();
+    } else if (params.has('filterId') && params.get('filterId') !== undefined) {
+      console.log(params.get('filterId'));
 
-    if (params.has('filter')) {
-      if (params.get('filter') === 'beurk') {
-        this.getBeurkMovies();
-      }
-      if (params.get('filter') === 'favoris') {
-        this.getFavMovies();
+      this.getMoviesByGenreId(Number(params.get('filterId')));
+    } else if (params.has('duration')) {
+      if (params.get('duration') === 'court') {
+        this.getMoviesDuration('court');
+      } else if (params.get('duration') === 'moyen') {
+        this.getMoviesDuration('moyen');
+      } else if (params.get('duration') === 'long') {
+        this.getMoviesDuration('long');
       }
     }
   }
 
-  // Methode pour montrer les films par genre
+  //Méthode pour afficher les films non vu par genre
+  getMoviesGenreId() {
+    this.movieService.getUnseenMovies().subscribe(
+      (data) => {
+        this.moviesGenres = data.map((movie: any) => {
+          return { genre: movie.genre.name, id: movie.genre.id };
+        });
+
+        console.log(this.moviesGenres);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
   getMoviesByGenreId(id: number) {
-    this.movieService.getMoviesbyGenreId(id).subscribe(
+    this.movieService.getUnseenMovies().subscribe(
       (data) => {
-        this.movies = data;
+        this.movies = data.filter((movie: any) => {
+          return movie.genre && movie.genre.id === id;
+        });
+
         this.movies.forEach((movie) => {
           this.movieService.getMoviePoster(movie.vo).subscribe(
             (posterUrl) => (movie.posterUrl = posterUrl),
             (error) => console.log(error)
           );
         });
+        console.log(id);
       },
       (error) => {
         console.log(error);
@@ -95,93 +112,29 @@ export class ToSeeComponent {
     );
   }
 
-  // Methode pour montrer les films par note
-  getMoviesByNote() {
-    this.movieService.getMoviesByNote().subscribe(
+  //Méthode pour afficher les films non vu par durée
+  getMoviesDuration(duration: string) {
+    this.movieService.getUnseenMovies().subscribe(
       (data) => {
-        this.movies = data;
+        this.movies = data.filter((movie: any) => {
+          if (duration === 'court') {
+            return movie.duration < 90;
+          } else if (duration === 'moyen') {
+            return movie.duration > 90 && movie.duration < 120;
+          } else if (duration === 'long') {
+            return movie.duration > 120;
+          } else {
+            return movie;
+          }
+        });
+
         this.movies.forEach((movie) => {
           this.movieService.getMoviePoster(movie.vo).subscribe(
             (posterUrl) => (movie.posterUrl = posterUrl),
             (error) => console.log(error)
           );
         });
-
-        console.log(this.movies);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
-  // Methode pour montrer les films par ordre alphabétique
-  getMoviesByTitle() {
-    this.movieService.getMoviesByOrder().subscribe(
-      (data) => {
-        this.movies = data;
-        this.movies.forEach((movie) => {
-          this.movieService.getMoviePoster(movie.vo).subscribe(
-            (posterUrl) => (movie.posterUrl = posterUrl),
-            (error) => console.log(error)
-          );
-        });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
-  // Methode pour montrer les films par date
-  getMoviesByDate() {
-    this.movieService.getMoviesByDateDesc().subscribe(
-      (data) => {
-        this.movies = data;
-        this.movies.forEach((movie) => {
-          this.movieService.getMoviePoster(movie.vo).subscribe(
-            (posterUrl) => (movie.posterUrl = posterUrl),
-            (error) => console.log(error)
-          );
-        });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
-  // Méthode pour montrer films tag Beurk
-
-  getBeurkMovies() {
-    this.movieService.getMoviesByTag('Beurk').subscribe(
-      (data) => {
-        this.movies = data;
-        this.movies.forEach((movie) => {
-          this.movieService.getMoviePoster(movie.vo).subscribe(
-            (posterUrl) => (movie.posterUrl = posterUrl),
-            (error) => console.log(error)
-          );
-        });
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }
-
-  // Méthode pour montrer films tag Favoris
-
-  getFavMovies() {
-    this.movieService.getMoviesByTag('Favoris').subscribe(
-      (data) => {
-        this.movies = data;
-        this.movies.forEach((movie) => {
-          this.movieService.getMoviePoster(movie.vo).subscribe(
-            (posterUrl) => (movie.posterUrl = posterUrl),
-            (error) => console.log(error)
-          );
-        });
+        console.log(duration);
       },
       (error) => {
         console.log(error);

@@ -1,5 +1,4 @@
 import {
-  ChangeDetectorRef,
   Component,
   OnInit,
   Output,
@@ -16,11 +15,7 @@ import { Router } from '@angular/router';
   styleUrl: './filter-sort-menu.component.css',
 })
 export class FilterSortMenuComponent implements OnInit {
-  constructor(
-    private cd: ChangeDetectorRef,
-    private eRef: ElementRef,
-    private router: Router
-  ) {}
+  constructor(private eRef: ElementRef, private router: Router) {}
 
   userChoices: any = {
     sort: [],
@@ -59,9 +54,9 @@ export class FilterSortMenuComponent implements OnInit {
     }
   }
 
-  // Je crée la méthode pour soumettre le formulaire
+  // Je crée la méthode pour naviguer vers la page filtered
   onSubmit(): void {
-    this.router.navigate(['/my-movies/filtered'], {
+    this.router.navigate(['/to-see/filtered'], {
       queryParams: {
         sort: this.userChoices.sort,
         filter: this.userChoices.filter,

@@ -1,6 +1,7 @@
 .wrapper {
   position: fixed;
   top: 4.5rem;
+  width: 100%;
 }
 .header {
   background-color: white;

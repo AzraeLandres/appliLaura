@@ -1,1 +1,52 @@
-<p>filter-menu works!</p>
+<div class="wrapper">
+  <h2>Filtres</h2>
+
+  <div class="form-group">
+    <h3>Durée</h3>
+
+    <div class="buttons flex">
+      <button
+        type="button"
+        [class.selected]="userChoices['duration'].includes('court')"
+        class="button"
+        (click)="setPrefFilter('Durée', 'court')"
+      >
+        Court
+      </button>
+      <button
+        type="button"
+        [class.selected]="userChoices['duration'].includes('moyen')"
+        class="button"
+        (click)="setPrefFilter('Durée', 'moyen')"
+      >
+        Moyen
+      </button>
+      <button
+        type="button"
+        [class.selected]="userChoices['duration'].includes('long')"
+        class="button"
+        (click)="setPrefFilter('Durée', 'long')"
+      >
+        Long
+      </button>
+    </div>
+
+    <div class="form-group">
+      <h3>Genre</h3>
+
+      <div class="buttons genre flex">
+        <button
+          type="button"
+          [class.selected]="userChoices['filter'].includes(genre.name)"
+          class="button"
+          *ngFor="let genre of toSeeGenres"
+          (click)="setGenreFilter('genre', genre.name, genre.id)"
+        >
+          {{ genre.name }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" (click)="onSubmit()">Valider</button>
+</div>

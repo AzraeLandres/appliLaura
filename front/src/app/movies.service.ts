@@ -9,6 +9,7 @@ import { Movie } from './models/movie.model';
 export class MoviesService {
   private url = 'https://dino-cine-back-15b7eabfff73.herokuapp.com/movies';
   private localUrl = 'http://localhost:8080/movies';
+  private genreUrl = 'https://dino-cine-back-15b7eabfff73.herokuapp.com/genres';
 
   private tmdbApiKey = 'bfe71b7c7b147b1316508086f210ad2a';
 
@@ -82,5 +83,10 @@ export class MoviesService {
   //Méthode pour avoir movie par tag
   getMoviesByTag(tag: string): Observable<any> {
     return this.http.get(this.url + '/tag/' + tag);
+  }
+
+  //Méthode pour avoir tous les genres
+  getGenres(): Observable<any> {
+    return this.http.get(this.genreUrl);
   }
 }
