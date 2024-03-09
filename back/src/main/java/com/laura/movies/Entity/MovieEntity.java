@@ -2,6 +2,7 @@ package com.laura.movies.Entity;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.val;
 
 @Data
 @Entity
@@ -36,12 +38,12 @@ public class MovieEntity {
     private String review;
     private Boolean seen;
     private String posterUrl;
-    @JsonManagedReference
+    @JsonBackReference(value = "genre-movie")
     @ManyToOne
     @JoinColumn(name = "id_genre")
     private GenreEntity genre;
 
-    @JsonManagedReference
+    @JsonBackReference(value = "who-movie")
     @ManyToOne
     @JoinColumn(name = "id_who")
     private WhoEntity who;

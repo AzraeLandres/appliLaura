@@ -17,7 +17,10 @@
         *ngFor="let movie of movies"
         [routerLink]="['/movie', movie.id]"
       >
-        <img [src]="movie.posterUrl" [alt]="movie.vo" />
+        <img
+          src="https://image.tmdb.org/t/p/w342{{ movie.posterUrl }}"
+          [alt]="movie.vo"
+        />
       </div>
     </div>
   </div>

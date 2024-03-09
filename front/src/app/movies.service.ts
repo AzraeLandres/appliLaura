@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, map, catchError, throwError } from 'rxjs';
 import { Movie } from './models/movie.model';
 
 @Injectable({
@@ -19,26 +19,16 @@ export class MoviesService {
   constructor(private http: HttpClient) {}
 
   //Méthode pour chercher les posters des films
-  getMoviePoster(movieTitle: string): Observable<string> {
-    return this.http
-      .get<any>(
-        `https://api.themoviedb.org/3/search/movie?api_key=${
-          this.tmdbApiKey
-        }&query=${encodeURIComponent(movieTitle)}`
-      )
-      .pipe(
-        map((response: { results: any[] }) => {
-          const movie = response.results[0];
-          return `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-        })
-      );
-  }
 
   //Méthode pour chercher tous les films
   getMovies() {
     return this.http.get<Movie[]>(this.url + '/all');
   }
 
+  //Méthode pour afficher les films par durée
+  getMoviesByDuration(min: number, max: number): Observable<any> {
+    return this.http.get(this.url + '/duration/between/' + min + '/' + max);
+  }
   //Méthode pour afficher les films en ordre alphabétique
   getMoviesByOrder(): Observable<any> {
     return this.http.get(this.url + '/all/asc');
@@ -88,5 +78,40 @@ export class MoviesService {
   //Méthode pour avoir tous les genres
   getGenres(): Observable<any> {
     return this.http.get(this.genreUrl);
+  }
+
+  //Méthode pour avoir les tousa films Tmdb
+  currentPage: number = 1;
+  getTmdbMovies(
+    minDuration: string,
+    maxDuration: string,
+    genreIds: number[]
+  ): Observable<any> {
+    const randomPage = Math.floor(Math.random() * 500) + 1;
+    const tmdbUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${
+      this.tmdbApiKey
+    }&with_runtime.gte=${minDuration}&with_runtime.lte=${maxDuration}&with_genres=${genreIds.join(
+      ','
+    )}&page=${randomPage}`;
+    return this.http.get(tmdbUrl);
+  }
+
+  getTmdbMoviesMood(mood: number): Observable<any> {
+    const tmdbUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${this.tmdbApiKey}&with_genres=${mood}`;
+    return this.http.get(tmdbUrl);
+  }
+
+  getTmdbMoviesDuration(
+    minDuration: string,
+    maxDuration: string,
+    genreIds: number[]
+  ): Observable<any> {
+    const randomPage = Math.floor(Math.random() * 500) + 1;
+    const tmdbUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${
+      this.tmdbApiKey
+    }&with_runtime.gte=${minDuration}&with_runtime.lte=${maxDuration}&with_genres=${genreIds.join(
+      ','
+    )}&page=${randomPage}`;
+    return this.http.get(tmdbUrl);
   }
 }

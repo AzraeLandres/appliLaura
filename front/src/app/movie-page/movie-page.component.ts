@@ -3,7 +3,7 @@ import { Movie } from '../models/movie.model';
 import { MoviesService } from '../movies.service';
 import { ActivatedRoute } from '@angular/router';
 import { EMPTY, Observable, map, switchMap, tap } from 'rxjs';
-
+import { FillDbService } from '../services/fill-db.service';
 @Component({
   selector: 'app-movie-page',
   templateUrl: './movie-page.component.html',
@@ -14,7 +14,8 @@ export class MoviePageComponent implements OnInit {
 
   constructor(
     private moviesService: MoviesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private fillDb: FillDbService
   ) {}
 
   ngOnInit() {
@@ -33,10 +34,7 @@ export class MoviePageComponent implements OnInit {
     return this.moviesService.getMovieById(id).pipe(
       switchMap((movie) => {
         console.log(movie);
-        return this.moviesService.getMoviePoster(movie.vo).pipe(
-          tap((posterUrl) => (movie.posterUrl = posterUrl)),
-          map(() => movie)
-        );
+        return this.fillDb.getMoviePoster(movie.vo).pipe(map(() => movie));
       })
     );
   }

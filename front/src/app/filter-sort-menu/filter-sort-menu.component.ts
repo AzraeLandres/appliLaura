@@ -56,7 +56,7 @@ export class FilterSortMenuComponent implements OnInit {
 
   // Je crée la méthode pour naviguer vers la page filtered
   onSubmit(): void {
-    this.router.navigate(['/to-see/filtered'], {
+    this.router.navigate(['/my-movies/filtered'], {
       queryParams: {
         sort: this.userChoices.sort,
         filter: this.userChoices.filter,

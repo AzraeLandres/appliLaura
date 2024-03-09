@@ -5,14 +5,20 @@ import java.util.List;
 import java.util.Optional;
 
 import com.laura.movies.Entity.MovieEntity;
+import com.laura.movies.Repository.MovieRepo;
 import com.laura.movies.Service.MovieService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
@@ -21,6 +27,9 @@ public class MovieController {
 
     @Autowired
     private MovieService movieService;
+
+    @Autowired
+    private MovieRepo movieRepository;
 
     @PostMapping("/add")
     public void addMovie(@RequestBody MovieEntity movie) {
@@ -111,6 +120,17 @@ public class MovieController {
     @GetMapping("/duration/between/{start}/{end}")
     public List<MovieEntity> getMoviesByDurationBetween(@PathVariable Integer start, @PathVariable Integer end) {
         return movieService.findByDurationBetween(start, end);
+    }
+
+    @PutMapping("/update/{id}")
+    public void updateMovie(@RequestBody MovieEntity movie, @PathVariable Integer id) {
+        movieService.updateMovie(movie, id);
+    }
+
+    @GetMapping("pages/{page}/{size}")
+    public Page<MovieEntity> getMoviesByPage(@PathVariable Integer page, @PathVariable Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return movieRepository.findAll(pageable);
     }
 
 }

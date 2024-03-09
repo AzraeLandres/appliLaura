@@ -3,6 +3,7 @@ package com.laura.movies.Repository;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,6 +14,8 @@ import com.laura.movies.Entity.MovieEntity;
 
 @Repository
 public interface MovieRepo extends JpaRepository<MovieEntity, Integer> {
+
+    Page<MovieEntity> findAll(Pageable pageable);
 
     Optional<MovieEntity> findById(Integer id);
 

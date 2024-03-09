@@ -40,3 +40,10 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+test.component.spec.ts
+test.component.ts
+test.service.spec.ts
+test.service.ts
+test.component.html
+test.component.css

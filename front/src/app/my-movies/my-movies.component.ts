@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie } from '../models/movie.model';
 import { MoviesService } from '../movies.service';
-import { HttpClient } from '@angular/common/http';
+import { FillDbService } from '../services/fill-db.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-
+import { from, filter, concatMap, toArray, tap, delay } from 'rxjs';
 @Component({
   selector: 'app-my-movies',
   templateUrl: './my-movies.component.html',
@@ -12,7 +12,8 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 export class MyMoviesComponent implements OnInit {
   constructor(
     private movieService: MoviesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private fillDbService: FillDbService
   ) {}
 
   movies: Movie[] = [];
@@ -35,24 +36,37 @@ export class MyMoviesComponent implements OnInit {
 
   // Methode pour montrer tous les films
   getallMovies() {
-    this.movieService.getMovies().subscribe(
-      (data) => {
-        this.movies = data;
-        this.movies.forEach((movie) => {
-          this.movieService.getMoviePoster(movie.vo).subscribe(
-            (posterUrl) => (movie.posterUrl = posterUrl),
-            (error) => console.log(error)
-          );
-        });
-
-        return this.movies;
-      },
-      (error) => {
-        console.log(error);
+    this.fillDbService.getAllMovies().subscribe((data: Movie[]) => {
+      this.movies = data;
+      if (data.filter((movie) => movie.seen === true)) {
+        this.movies = data.filter((movie) => movie.seen === true);
       }
-    );
+
+      if (this.movies.some((movie) => movie.posterUrl === null)) {
+        this.fillDatabase();
+      }
+    });
   }
 
+  fillDatabase() {
+    from(this.movies)
+      .pipe(
+        filter((movie) => movie.posterUrl === null),
+        concatMap((movie) =>
+          this.fillDbService.getMoviePoster(movie.vo).pipe(
+            filter((posterUrl) => !!posterUrl),
+            tap((data) => {
+              // Find the index of the movie in the movies array
+              const index = this.movies.findIndex((m) => m.vo === movie.vo);
+              // Update the movie in-place in the movies array
+              this.movies[index] = { ...movie, posterUrl: data };
+            })
+          )
+        ),
+        toArray()
+      )
+      .subscribe();
+  }
   // Récupération des paramètres de l'URL
   getParsedUrl(params: ParamMap) {
     console.log(params);
@@ -83,12 +97,6 @@ export class MyMoviesComponent implements OnInit {
     this.movieService.getMoviesbyGenreId(id).subscribe(
       (data) => {
         this.movies = data;
-        this.movies.forEach((movie) => {
-          this.movieService.getMoviePoster(movie.vo).subscribe(
-            (posterUrl) => (movie.posterUrl = posterUrl),
-            (error) => console.log(error)
-          );
-        });
       },
       (error) => {
         console.log(error);
@@ -101,12 +109,6 @@ export class MyMoviesComponent implements OnInit {
     this.movieService.getMoviesByNote().subscribe(
       (data) => {
         this.movies = data;
-        this.movies.forEach((movie) => {
-          this.movieService.getMoviePoster(movie.vo).subscribe(
-            (posterUrl) => (movie.posterUrl = posterUrl),
-            (error) => console.log(error)
-          );
-        });
 
         console.log(this.movies);
       },
@@ -121,12 +123,6 @@ export class MyMoviesComponent implements OnInit {
     this.movieService.getMoviesByOrder().subscribe(
       (data) => {
         this.movies = data;
-        this.movies.forEach((movie) => {
-          this.movieService.getMoviePoster(movie.vo).subscribe(
-            (posterUrl) => (movie.posterUrl = posterUrl),
-            (error) => console.log(error)
-          );
-        });
       },
       (error) => {
         console.log(error);
@@ -139,12 +135,6 @@ export class MyMoviesComponent implements OnInit {
     this.movieService.getMoviesByDateDesc().subscribe(
       (data) => {
         this.movies = data;
-        this.movies.forEach((movie) => {
-          this.movieService.getMoviePoster(movie.vo).subscribe(
-            (posterUrl) => (movie.posterUrl = posterUrl),
-            (error) => console.log(error)
-          );
-        });
       },
       (error) => {
         console.log(error);
@@ -158,12 +148,6 @@ export class MyMoviesComponent implements OnInit {
     this.movieService.getMoviesByTag('Beurk').subscribe(
       (data) => {
         this.movies = data;
-        this.movies.forEach((movie) => {
-          this.movieService.getMoviePoster(movie.vo).subscribe(
-            (posterUrl) => (movie.posterUrl = posterUrl),
-            (error) => console.log(error)
-          );
-        });
       },
       (error) => {
         console.log(error);
@@ -177,12 +161,6 @@ export class MyMoviesComponent implements OnInit {
     this.movieService.getMoviesByTag('Favoris').subscribe(
       (data) => {
         this.movies = data;
-        this.movies.forEach((movie) => {
-          this.movieService.getMoviePoster(movie.vo).subscribe(
-            (posterUrl) => (movie.posterUrl = posterUrl),
-            (error) => console.log(error)
-          );
-        });
       },
       (error) => {
         console.log(error);

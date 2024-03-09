@@ -3,6 +3,7 @@ package com.laura.movies.Entity;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class GenreEntity {
 
     private String name;
 
-    @JsonBackReference
+    @JsonManagedReference(value = "genre-movie")
     @OneToMany(mappedBy = "genre")
     private List<MovieEntity> movies;
 }

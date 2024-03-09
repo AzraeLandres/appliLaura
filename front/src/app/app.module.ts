@@ -16,6 +16,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { FilterSortMenuComponent } from './filter-sort-menu/filter-sort-menu.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FilterMenuComponent } from './filter-menu/filter-menu.component';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { FilterMenuComponent } from './filter-menu/filter-menu.component';
     MoviePageComponent,
     FilterSortMenuComponent,
     FilterMenuComponent,
+    TestComponent,
   ],
   imports: [
     BrowserModule,

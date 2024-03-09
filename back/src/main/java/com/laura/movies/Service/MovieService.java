@@ -92,4 +92,15 @@ public class MovieService {
     public List<MovieEntity> findAllByOrderByVoAsc() {
         return movieRepo.findByOrderByVoAsc();
     }
+
+    public void updateMovie(MovieEntity movieEntity, Integer id) {
+        Optional<MovieEntity> optionalMovie = movieRepo.findById(id);
+        if (optionalMovie.isPresent()) {
+            MovieEntity existingMovie = optionalMovie.get();
+            existingMovie.setPosterUrl(movieEntity.getPosterUrl());
+            movieRepo.save(existingMovie);
+        } else {
+            throw new RuntimeException("Movie not found");
+        }
+    }
 }

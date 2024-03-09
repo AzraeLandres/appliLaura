@@ -1,1 +1,84 @@
-<p>quiz works!</p>
+<div class="wrapper">
+  <div class="progress" *ngIf="showResults === false">
+    <h3>Question {{ currentQuestionIndex + 1 }}/{{ questions.length }}</h3>
+  </div>
+
+  <form
+    [formGroup]="myForm"
+    class="form"
+    (ngSubmit)="onSubmit()"
+    *ngIf="showResults === false"
+  >
+    <div class="question">
+      <h1>
+        {{ questions[currentQuestionIndex].question }}
+      </h1>
+    </div>
+
+    <div
+      class="answers"
+      *ngFor="let answer of questions[currentQuestionIndex].answers"
+    >
+      <button
+        (click)="saveChoice(answer.choice)"
+        type="button"
+        [class.selected]="isSelected(answer.choice)"
+      >
+        {{ answer.answer }}
+      </button>
+    </div>
+
+    <div class="buttons">
+      <button
+        class="back"
+        type="button"
+        (click)="previousQuestion()"
+        *ngIf="currentQuestionIndex > 0"
+      >
+        Précédent
+      </button>
+      <button
+        class="next"
+        type="button"
+        (click)="nextQuestion()"
+        *ngIf="
+          currentQuestionIndex >= 0 &&
+          currentQuestionIndex < questions.length - 1 &&
+          isClicked
+        "
+      >
+        Suivant
+      </button>
+      <button
+        class="validate"
+        type="submit"
+        *ngIf="
+          currentQuestionIndex === questions.length - 1 &&
+          userChoices.length === 3
+        "
+      >
+        Valider
+      </button>
+    </div>
+  </form>
+
+  <div class="result" *ngIf="showResults && finalResult && noResults === false">
+    <h1>{{ finalResult.title }}</h1>
+    <p class="overview">{{ finalResult.overview }}</p>
+    <div class="img">
+      <img [src]="moviePoster" [alt]="finalResult.title" />
+    </div>
+
+    <div class="buttons" *ngIf="noResults === false">
+      <button class="back" type="button" (click)="newResult()">
+        Non merci...
+      </button>
+    </div>
+
+    <div *ngIf="noResults">
+      <button class="back" type="button" (click)="newResult()">
+        Recommencer
+      </button>
+    </div>
+  </div>
+</div>

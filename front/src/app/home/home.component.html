@@ -10,7 +10,7 @@
   <div class="cards flex">
     <div class="movieCard" *ngFor="let movie of movies">
       <img
-        [src]="movie.posterUrl"
+        src="https://image.tmdb.org/t/p/w342{{ movie.posterUrl }}"
         alt="poster of movie"
         [routerLink]="['/movie', movie.id]"
       />
@@ -23,7 +23,7 @@
   <div class="cards flex">
     <div class="movieCard" *ngFor="let unseen of unseenMovies">
       <img
-        [src]="unseen.posterUrl"
+        src="https://image.tmdb.org/t/p/w342{{ unseen.posterUrl }}"
         alt="poster of movie"
         [routerLink]="['/movie', unseen.id]"
       />

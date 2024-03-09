@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Movie } from '../models/movie.model';
 import { MoviesService } from '../movies.service';
-
+import { FillDbService } from '../services/fill-db.service';
 @Component({
   selector: 'app-to-see',
   templateUrl: './to-see.component.html',
@@ -11,7 +11,8 @@ import { MoviesService } from '../movies.service';
 export class ToSeeComponent {
   constructor(
     private movieService: MoviesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private fillDbService: FillDbService
   ) {}
 
   movies: Movie[] = [];
@@ -36,16 +37,12 @@ export class ToSeeComponent {
 
   // Methode pour montrer tous les films pas vus
   getUnseenMovies() {
-    this.movieService.getUnseenMovies().subscribe(
+    this.fillDbService.getAllMovies().subscribe(
       (data) => {
         this.movies = data;
-        console.log(this.movies);
-        this.movies.forEach((movie) => {
-          this.movieService.getMoviePoster(movie.vo).subscribe(
-            (posterUrl) => (movie.posterUrl = posterUrl),
-            (error) => console.log(error)
-          );
-        });
+        if (data.filter((movie) => movie.seen !== true)) {
+          this.movies = data.filter((movie) => movie.seen !== true);
+        }
 
         return this.movies;
       },
@@ -77,7 +74,7 @@ export class ToSeeComponent {
 
   //Méthode pour afficher les films non vu par genre
   getMoviesGenreId() {
-    this.movieService.getUnseenMovies().subscribe(
+    this.fillDbService.getUnseenMovies().subscribe(
       (data) => {
         this.moviesGenres = data.map((movie: any) => {
           return { genre: movie.genre.name, id: movie.genre.id };
@@ -92,18 +89,12 @@ export class ToSeeComponent {
   }
 
   getMoviesByGenreId(id: number) {
-    this.movieService.getUnseenMovies().subscribe(
+    this.fillDbService.getUnseenMovies().subscribe(
       (data) => {
         this.movies = data.filter((movie: any) => {
           return movie.genre && movie.genre.id === id;
         });
 
-        this.movies.forEach((movie) => {
-          this.movieService.getMoviePoster(movie.vo).subscribe(
-            (posterUrl) => (movie.posterUrl = posterUrl),
-            (error) => console.log(error)
-          );
-        });
         console.log(id);
       },
       (error) => {
@@ -114,7 +105,7 @@ export class ToSeeComponent {
 
   //Méthode pour afficher les films non vu par durée
   getMoviesDuration(duration: string) {
-    this.movieService.getUnseenMovies().subscribe(
+    this.fillDbService.getUnseenMovies().subscribe(
       (data) => {
         this.movies = data.filter((movie: any) => {
           if (duration === 'court') {
@@ -128,12 +119,6 @@ export class ToSeeComponent {
           }
         });
 
-        this.movies.forEach((movie) => {
-          this.movieService.getMoviePoster(movie.vo).subscribe(
-            (posterUrl) => (movie.posterUrl = posterUrl),
-            (error) => console.log(error)
-          );
-        });
         console.log(duration);
       },
       (error) => {
